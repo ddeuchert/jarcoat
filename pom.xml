@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+ - Copyright 2026 David Deuchert
+ -
+ - Licensed under the Apache License, Version 2.0 (the "License");
+ - you may not use this file except in compliance with the License.
+ - You may obtain a copy of the License at
+ -
+ -     http://www.apache.org/licenses/LICENSE-2.0
+ -
+ - Unless required by applicable law or agreed to in writing, software
+ - distributed under the License is distributed on an "AS IS" BASIS,
+ - WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ - See the License for the specific language governing permissions and
+ - limitations under the License.
+-->
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <!-- groupId org.jarcoat requires owning jarcoat.org and verifying it on Maven Central via a DNS TXT record (docs/SPEC.md, D9). -->
+  <groupId>org.jarcoat</groupId>
+  <artifactId>jarcoat-parent</artifactId>
+  <version>0.1.0-SNAPSHOT</version>
+  <packaging>pom</packaging>
+
+  <name>JarCoat</name>
+  <description>Wrap an executable JAR and run Java agents alongside it.</description>
+
+  <!-- Maven Central requires url, licenses, developers and scm. -->
+  <url>https://github.com/ddeuchert/jarcoat</url>
+  <inceptionYear>2026</inceptionYear>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <id>ddeuchert</id>
+      <name>David Deuchert</name>
+      <url>https://github.com/ddeuchert</url>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/ddeuchert/jarcoat.git</connection>
+    <developerConnection>scm:git:git@github.com:ddeuchert/jarcoat.git</developerConnection>
+    <url>https://github.com/ddeuchert/jarcoat</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <issueManagement>
+    <system>GitHub Issues</system>
+    <url>https://github.com/ddeuchert/jarcoat/issues</url>
+  </issueManagement>
+
+  <modules>
+    <module>jarcoat-launcher</module>
+    <module>jarcoat-core</module>
+    <module>jarcoat-cli</module>
+    <module>jarcoat-maven-plugin</module>
+  </modules>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.build.outputTimestamp>2026-01-01T00:00:00Z</project.build.outputTimestamp>
+    <!-- Runtime floor for the launcher that ends up inside wrapped jars. See SPEC Q1. -->
+    <maven.compiler.release>11</maven.compiler.release>
+    <junit.version>5.11.4</junit.version>
+    <maven.api.version>3.9.9</maven.api.version>
+    <plugin.tools.version>3.15.1</plugin.tools.version>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.jarcoat</groupId>
+        <artifactId>jarcoat-launcher</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.jarcoat</groupId>
+        <artifactId>jarcoat-core</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.junit</groupId>
+        <artifactId>junit-bom</artifactId>
+        <version>${junit.version}</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.13.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>3.5.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>3.4.2</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-shade-plugin</artifactId>
+          <version>3.6.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-plugin-plugin</artifactId>
+          <version>${plugin.tools.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+</project>

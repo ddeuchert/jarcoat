@@ -1,0 +1,19 @@
+target/
+*.class
+*.iml
+.idea/
+.vscode/
+.classpath
+.project
+.settings/
+dependency-reduced-pom.xml
+*.log
+.DS_Store
+
+# Personal, uncommitted notes and cross-machine handoff files
+RESUME.md
+DaveNotes.md
+.claude/skills/checkpoint/
+.claude/skills/resume/
+.claude/skills/git-side/
+.claude/worktrees/
