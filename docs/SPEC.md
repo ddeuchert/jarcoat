@@ -284,7 +284,13 @@ All on OpenJDK 21.0.x, Linux, real JVM processes, compiled with `--release 11`.
 - **M2:** `Boot-Class-Path`, nicer error messages, provenance report (`--list`, SHA-256), extraction cache (Q7).
 - **M3:** optional `fork` fallback for `-cp`/native-agent cases; polish.
 - **M4:** Gradle plugin.
-- **M5:** docs site, license, Central + Plugin Portal publishing, 0.1.0 release.
+- **M5:** docs site, Central + Plugin Portal publishing, 0.1.0 release. License is done (Q4).
+  - **Set up Maven Central publishing when we reach the first release.** Verify the `org.jarcoat` namespace on the
+    Central Portal (DNS TXT record on jarcoat.org, D9), generate a GPG signing key, add the publishing token and key as
+    GitHub secrets, and add the `central-publishing-maven-plugin`, source/javadoc jars and signing to a release
+    profile plus a release workflow. Model it on logaperture's `doc/specs/maven-central-publishing.md` and
+    `.github/workflows/release.yml`. The POM already carries the required `url`, `licenses`, `developers` and `scm`.
+    Spec it in `docs/specs/maven-central-publishing.md` before implementing.
 
 ## Appendix A: Alternatives considered
 
